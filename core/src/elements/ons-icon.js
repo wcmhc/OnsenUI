@@ -177,7 +177,11 @@ export default class IconElement extends BaseElement {
     const style = {};
 
     // Icon
-    if (iconName.indexOf('ion-') === 0) {
+    if (iconName.indexOf('(') === 0 && iconName.indexOf(')') > 0) {
+      const parts = iconName.split('-');
+      classList.push((parts.slice(1)).join('-'));
+      classList.push(parts[0].substring(1, parts[0].length - 1));
+    } else if (iconName.indexOf('ion-') === 0) {
       classList.push(iconName);
       classList.push('ons-icon--ion');
     } else if (iconName.indexOf('fa-') === 0) {
